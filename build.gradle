@@ -1,11 +1,16 @@
 apply plugin: 'java'
 
+group = "org.jbaiera.play"
+version = "SNAPSHOT-1.0"
+description = "Lets play with Kafka - The distributed message broker service"
+
 repositories {
     mavenCentral()
 }
 
 dependencies {
     compile 'org.slf4j:slf4j-api:1.7.12'
+    compile 'org.apache.kafka:kafka-clients:0.8.2.2'
 
     testCompile 'junit:junit:4.12'
 }
