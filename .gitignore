@@ -1,3 +1,6 @@
+### Flume
+flume.log*
+
 ### Java template
 *.class
 
