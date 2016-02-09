@@ -15,6 +15,11 @@
 # specific language governing permissions and limitations
 # under the License.
 
+# To execute this flow as an agent, run:
+# 
+# $ bin/flume-ng agent -n $agent_name -c conf -f $configFile
+# 
+# via commandline.
 
 # The configuration file needs to define the sources, 
 # the channels and the sinks.
