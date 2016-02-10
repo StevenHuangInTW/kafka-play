@@ -10,7 +10,7 @@ public class UUIDProducer {
 
     private void run() throws InterruptedException {
 
-        String topic = "t1";
+        String topic = "uuid";
 
         Properties kafkaProps = new Properties();
         kafkaProps.put("bootstrap.servers", "localhost:9092");

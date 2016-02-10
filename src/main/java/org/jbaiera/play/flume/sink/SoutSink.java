@@ -14,6 +14,7 @@ public class SoutSink extends AbstractSink implements Configurable {
 
 	private PrintStream outputStream;
 	private String propertyValue;
+	private long outputCount;
 
 	@Override
 	public void configure(Context context) {
@@ -34,6 +35,9 @@ public class SoutSink extends AbstractSink implements Configurable {
 		// Cleanup any allocated resources:
 		// (Null out the stream because we really shouldn't close STDOUT)
 		this.outputStream = null;
+
+		// Let's log how many messages we received:
+		LOGGER.info("Received {} messages", outputCount);
 	}
 
 	@Override
@@ -88,6 +92,7 @@ public class SoutSink extends AbstractSink implements Configurable {
         // write them to STDOUT:
         String data = new String(event.getBody());
         outputStream.println(data);
+		outputCount++;
     }
 
     private void potentiallyHandleException(Throwable t) {
