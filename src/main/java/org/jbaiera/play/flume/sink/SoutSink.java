@@ -13,21 +13,20 @@ public class SoutSink extends AbstractSink implements Configurable {
 	private static final Logger LOGGER = LoggerFactory.getLogger(SoutSink.class);
 
 	private PrintStream outputStream;
-	private String propertyValue;
+	private boolean printHeaders;
 	private long outputCount;
 
 	@Override
 	public void configure(Context context) {
 		// process context of input values:
-		this.propertyValue = context.getString("property", "default");
-		LOGGER.info("Found configured property value : '{}'", this.propertyValue);
+		this.printHeaders = "true".equalsIgnoreCase(context.getString("printHeaders", "false"));
+		LOGGER.info("Found configured property value : '{}'", this.printHeaders);
 	}
 
 	@Override
 	public synchronized void start() {
 		// Initialize your connection to external resource:
 		this.outputStream = System.out;
-		LOGGER.info("Starting Sink with property : '{}'", this.propertyValue);
 	}
 
 	@Override
@@ -90,6 +89,12 @@ public class SoutSink extends AbstractSink implements Configurable {
     private void doSomething(Event event) {
         // Here we're just going to convert the bytes to strings and
         // write them to STDOUT:
+
+		if (printHeaders) {
+			String headers = event.getHeaders().toString();
+			outputStream.println(headers);
+		}
+
         String data = new String(event.getBody());
         outputStream.println(data);
 		outputCount++;
